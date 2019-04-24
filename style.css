@@ -1,0 +1,65 @@
+:root {
+  --green: #1BA479;
+  --greenDark: #158761;
+  --yellow: #F1A820;
+
+  --purple: #40263E;
+  --purpleHover: #331e32;
+
+  --red: #BB262F;
+  --orange: #F05630;
+
+  --body: #130b12;
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  height: 100vh;
+  display: flex;
+  background: var(--body);
+}
+.memory-game {
+  width: 640px;
+  height: 640px;
+  margin: auto;
+  display: grid;
+  grid-template-rows: 3;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  padding: 1rem;
+  perspective: 1000px;
+}
+.memory-card {
+  position: relative;
+  box-shadow: 1px 1px 1px rgba(37, 21, 36, 0.8);
+  transform: scale(1);
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform .5s;
+}
+.memory-card:active {
+  transform: scale(0.97);
+  transition: all .2s;
+}
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+.front-face,
+.back-face {
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem;
+  position: absolute;
+  border-radius: 5px;
+  background: var(--purple);
+  backface-visibility: hidden;
+}
+.front-face {
+  transform: rotateY(180deg);
+}
+.memory-card:hover .back-face {
+  background: var(--purpleHover);
+}

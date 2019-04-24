@@ -1,0 +1,17 @@
+Notes
+
+Features
+- 'shoot' cards to choose => update animation to spin + bullet hole
+- 3 levels of difficulty ( dictated by grid size =>  5x3, 6x4, 7x5)
+- player enter name
+- 3 types of cards to flip
+-- good = [ammo(+1 bullet), beer(+1 health)], bad = [enemy(-2), snake(-1), scorpion(-1)], neutral = cigar, horse
+---bad mismatch = getting shot
+- start over button
+- animated cards ( 2step )
+- screen shake
+- sound effects
+- background song
+- voices
+- 2-3 characters to choose from
+--each has own starting ability (1.extra health, 2.extra bullet )
