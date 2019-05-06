@@ -5,49 +5,86 @@ let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
 
-// Game Modes
-let modes = [['easy', 16], ['medium', 20], ['hard', 30]]
-console.log({modes})
+
+const gameModeBtns = document.querySelectorAll('.game-mode-btn')
+
+// Game Mode Configuration
+const gameModeToAmounts = new Map([
+  ['easy', {ammo: 4, beer: 4, cigar: 2, enemigo: 2, snake: 2, scorpion: 2} ],
+  ['medium', {ammo: 6, beer: 4, cigar: 4, enemigo: 4, snake: 2, scorpion: 2} ],
+  // ['hard', {ammo: 4, beer: 4, cigar: 4, enemigo: 2, snake: 2, scorpion: 2} ]
+])
+let gameMode = 'easy'
+const cardAmounts = gameModeToAmounts.get(gameMode)
+
+// Select Game Mode
+function selectGameMode(e) {
+  gameMode = e.target.getAttribute('data-mode')
+  console.log(gameMode)
+  document.querySelector('#gameModeBtns').style.display = 'none'
+}
+
+gameModeBtns.forEach(btn => btn.addEventListener('click', selectGameMode))
 
 
 class Card {
-  constructor(name, image, health, ammo) {
+  constructor(name, imgUrl, health, ammo) {
     this.name = name
-    this.image = image
     this.health = health
     this.ammo = ammo
+    this.imgUrl = imgUrl
+    this.addImages = (card) => {
+      let frontFace = new Image()
+      frontFace.src = this.imgUrl
+      frontFace.className = 'front-face'
+      let backFace = new Image()
+      backFace.src = 'img/card-back.svg'
+      backFace.className = 'back-face'
+      card.append(backFace)
+      card.append(frontFace)
+    }
+  }
+  createCards(imgUrl) {
+    let card = document.createElement('div')
+    card.className = 'memory-card ' + this.name
+    card.dataset.health = this.health
+    card.dataset.ammo = this.ammo
+    this.addImages(card)
+    game.appendChild(card)
+    return card
   }
 }
 
+
 // Good Cards
-const ammoCards = [...Array(4)].map(i => new Card('ammunition', null, 1, null))
-const beerCards = [...Array(4)].map(i => new Card('beer', null, 1, null))
-const cigarCards = [...Array(2)].map(i => new Card('cigar', null, 1, null))
+const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCards())
+const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCards())
+const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCards())
 const goodCards = [...ammoCards, ...beerCards, ...cigarCards]
 
 // Bad Cards
-const enemigoCards = [...Array(2)].map(i => new Card('enemigo', null, -1, null))
-const snakeCards = [...Array(2)].map(i => new Card('snake', null, -1, null))
-const scorpionCards = [...Array(2)].map(i => new Card('scorpion', null, -1, null))
+const enemigoCards = [...Array(2)].map(i => new Card('enemigo', 'img/vue.svg', -1, null).createCards())
+const snakeCards = [...Array(2)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCards())
+const scorpionCards = [...Array(2)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCards())
 // const bandito = [...Array(2)].map(i => new Card('bandito', null, null, -1))
 const badCards = [...enemigoCards, ...snakeCards, ...scorpionCards]
 
 const allCards = [...goodCards, ...badCards]
 console.log({allCards})
 
-function dealCards() {
-  card = document.createElement('div')
-  allCards.forEach(function() {
-    clone = card.cloneNode()
-    clone.textContent = this.name
-    clone.className = 'memory-card'
-    clone.dataset.cardtype = 'cardtype'
+// function dealCards() {
+//   card = document.createElement('div')
+//   allCards.forEach(function() {
+//     clone = card.cloneNode()
+//     clone.textContent = this.name
+//     clone.className = 'memory-card'
+//     clone.dataset.cardtype = 'cardtype'
     
-    game.appendChild(clone)
-    console.log(clone)
-  })
-}
-dealCards()
+//     game.appendChild(clone)
+//     console.log(clone)
+//   })
+// }
+// dealCards()
 
 
 function flipCard() {
