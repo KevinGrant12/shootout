@@ -16,27 +16,29 @@ Features
 Card Types
 --------------//
 GOOD
-  Ammo
-  Beer
-  Cigar
+  Ammo = +1 ammo
+  Food = +1 health
+  Beer = +1 health
+  Cigar = +1 moral
 
 BAD
-  Enemigo
-  Bandito
-  Snake
-  Scorpion
+  Snake = -1 health
+  Scorpion = -1 moral
+  Enemigo = -1 health
+  Bandito = -1 ammo, -1 moral
+  Rival = -2 health
 
 
 Modes
 --------------//
 Easy = 16 cards
-  10 good [4x ammo, 4x beers, 2x cigars]
+  10 good [4x ammo, 4x beers, 2x food]
   6 bad [2x snakes, 2x enemigos, 2X scorpions]
 
 Medium = 20 cards
-  12 good
-  8 bad
+  12 good [4x ammo, 4x beers, 2x food, 2x cigars]
+  12 bad [2x snakes, 2x scorpions, 4x enemigos, 2x banditos]
 
 Hard = 30 cards
-  16 good
-  14 bad 
+  16 good [4x ammo, 4x beers, 4x food, 4x cigars]
+  16 bad [2x snakes, 2x scorpions, 4x enemigos, 4x banditos, 4x rival]

@@ -33,16 +33,51 @@ class Card {
   }
 }
 
-const gameModeBtns = document.querySelectorAll('.game-mode-btn')
-
 // Game Mode Configuration
 const gameModeToAmounts = new Map([
-  ['easy', {ammo: 4, beer: 4, cigar: 2, enemigo: 2, snake: 2, scorpion: 2} ],
-  ['medium', {ammo: 6, beer: 4, cigar: 4, enemigo: 4, snake: 2, scorpion: 2} ],
-  // ['hard', {ammo: 4, beer: 4, cigar: 4, enemigo: 2, snake: 2, scorpion: 2} ]
+  ['easy',
+    {
+      ammo: 4,
+      beer: 4,
+      food: 2,
+      cigar: 0,
+      snake: 2,
+      scorpion: 2,
+      enemigo: 2,
+      bandito: 0,
+      rival: 0
+    }
+  ],
+  ['medium',
+    {
+      ammo: 4,
+      beer: 4,
+      food: 2,
+      cigar: 2,
+      snake: 2,
+      scorpion: 2,
+      enemigo: 4,
+      bandito: 4,
+      rival: 0 
+    }
+  ],
+  ['hard',
+    {
+      ammo: 4,
+      beer: 4,
+      food: 4,
+      cigar: 4,
+      snake: 2,
+      scorpion: 2,
+      enemigo: 4,
+      bandito: 4,
+      rival: 4
+    }
+  ],
 ])
 
-// Select Game Mode
+const gameModeBtns = document.querySelectorAll('.game-mode-btn').forEach(btn => btn.addEventListener('click', selectGameMode))
+
 function selectGameMode(e) {
   let gameMode = e.target.getAttribute('data-mode')
   const cardAmounts = gameModeToAmounts.get(gameMode)
@@ -51,46 +86,27 @@ function selectGameMode(e) {
   dealCards(cardAmounts)
 }
 
-gameModeBtns.forEach(btn => btn.addEventListener('click', selectGameMode))
-
-
-
-
-// Deal Cards
 function dealCards(cardAmounts) {
-// Good Cards
-const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
-const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCard())
-const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCard())
-const goodCards = [...ammoCards, ...beerCards, ...cigarCards]
 
-// Bad Cards
-const enemigoCards = [...Array(2)].map(i => new Card('enemigo', 'img/vue.svg', -1, null).createCard())
-const snakeCards = [...Array(2)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCard())
-const scorpionCards = [...Array(2)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCard())
-// const bandito = [...Array(2)].map(i => new Card('bandito', null, null, -1))
-const badCards = [...enemigoCards, ...snakeCards, ...scorpionCards]
+  // Good Cards
+  const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
+  const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCard())
+  const foodCards = [...Array(cardAmounts.food)].map(i => new Card('food', 'img/angular.svg', 1, null).createCard())
+  const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCard())
 
-// All Cards
-const allCards = [...goodCards, ...badCards]
-  console.log({allCards})
+  // Bad Cards
+  const snakeCards = [...Array(cardAmounts.snake)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCard())
+  const scorpionCards = [...Array(cardAmounts.scorpion)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCard())
+  const enemigoCards = [...Array(cardAmounts.enemigo)].map(i => new Card('enemigo', 'img/vue.svg', -1, null).createCard())
+  const banditoCards = [...Array(cardAmounts.bandito)].map(i => new Card('bandito', 'img/aurelia.svg', -1, null).createCard())
+  const rivalCards = [...Array(cardAmounts.rival)].map(i => new Card('rival', 'img/aurelia.svg', -1, null).createCard())
+
+  // Card Collection
+  const goodCards = [...ammoCards, ...beerCards, ...foodCards, ...cigarCards]
+  const badCards = [...snakeCards, ...scorpionCards, ...enemigoCards, ...banditoCards, ...rivalCards]
+  const allCards = [...goodCards, ...badCards]
   allCards.map(card => game.appendChild(card))
 }
-
-// function dealCards() {
-//   card = document.createElement('div')
-//   allCards.forEach(function() {
-//     clone = card.cloneNode()
-//     clone.textContent = this.name
-//     clone.className = 'memory-card'
-//     clone.dataset.cardtype = 'cardtype'
-    
-//     game.appendChild(clone)
-//     console.log(clone)
-//   })
-// }
-// dealCards()
-
 
 function flipCard() {
   if (lockBoard) return
@@ -107,7 +123,6 @@ function flipCard() {
   secondCard = this
 
   checkForMatch()
-
 }
 
 function checkForMatch() {
