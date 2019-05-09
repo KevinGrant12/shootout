@@ -5,7 +5,7 @@ Features
 - 3 levels of difficulty ( dictated by grid size =>  4x4, 5x4, 6x5)
 - player enter name
 - start over button
-- animated cards ( 2step )
+- animated cards ( 2step ) => overflow card for depth?
 - screen shake
 - sound effects
 - background song

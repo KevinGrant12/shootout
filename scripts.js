@@ -5,28 +5,6 @@ let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
 
-
-const gameModeBtns = document.querySelectorAll('.game-mode-btn')
-
-// Game Mode Configuration
-const gameModeToAmounts = new Map([
-  ['easy', {ammo: 4, beer: 4, cigar: 2, enemigo: 2, snake: 2, scorpion: 2} ],
-  ['medium', {ammo: 6, beer: 4, cigar: 4, enemigo: 4, snake: 2, scorpion: 2} ],
-  // ['hard', {ammo: 4, beer: 4, cigar: 4, enemigo: 2, snake: 2, scorpion: 2} ]
-])
-let gameMode = 'easy'
-const cardAmounts = gameModeToAmounts.get(gameMode)
-
-// Select Game Mode
-function selectGameMode(e) {
-  gameMode = e.target.getAttribute('data-mode')
-  console.log(gameMode)
-  document.querySelector('#gameModeBtns').style.display = 'none'
-}
-
-gameModeBtns.forEach(btn => btn.addEventListener('click', selectGameMode))
-
-
 class Card {
   constructor(name, imgUrl, health, ammo) {
     this.name = name
@@ -44,33 +22,60 @@ class Card {
       card.append(frontFace)
     }
   }
-  createCards(imgUrl) {
+  createCard(imgUrl) {
     let card = document.createElement('div')
     card.className = 'memory-card ' + this.name
     card.dataset.health = this.health
     card.dataset.ammo = this.ammo
     this.addImages(card)
-    game.appendChild(card)
+    // game.appendChild(card)
     return card
   }
 }
 
+const gameModeBtns = document.querySelectorAll('.game-mode-btn')
 
+// Game Mode Configuration
+const gameModeToAmounts = new Map([
+  ['easy', {ammo: 4, beer: 4, cigar: 2, enemigo: 2, snake: 2, scorpion: 2} ],
+  ['medium', {ammo: 6, beer: 4, cigar: 4, enemigo: 4, snake: 2, scorpion: 2} ],
+  // ['hard', {ammo: 4, beer: 4, cigar: 4, enemigo: 2, snake: 2, scorpion: 2} ]
+])
+
+// Select Game Mode
+function selectGameMode(e) {
+  let gameMode = e.target.getAttribute('data-mode')
+  const cardAmounts = gameModeToAmounts.get(gameMode)
+  console.log(gameMode)
+  document.querySelector('#gameModeBtns').style.display = 'none'
+  dealCards(cardAmounts)
+}
+
+gameModeBtns.forEach(btn => btn.addEventListener('click', selectGameMode))
+
+
+
+
+// Deal Cards
+function dealCards(cardAmounts) {
 // Good Cards
-const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCards())
-const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCards())
-const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCards())
+const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
+const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCard())
+const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCard())
 const goodCards = [...ammoCards, ...beerCards, ...cigarCards]
 
 // Bad Cards
-const enemigoCards = [...Array(2)].map(i => new Card('enemigo', 'img/vue.svg', -1, null).createCards())
-const snakeCards = [...Array(2)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCards())
-const scorpionCards = [...Array(2)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCards())
+const enemigoCards = [...Array(2)].map(i => new Card('enemigo', 'img/vue.svg', -1, null).createCard())
+const snakeCards = [...Array(2)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCard())
+const scorpionCards = [...Array(2)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCard())
 // const bandito = [...Array(2)].map(i => new Card('bandito', null, null, -1))
 const badCards = [...enemigoCards, ...snakeCards, ...scorpionCards]
 
+// All Cards
 const allCards = [...goodCards, ...badCards]
-console.log({allCards})
+  console.log({allCards})
+  allCards.map(card => game.appendChild(card))
+}
 
 // function dealCards() {
 //   card = document.createElement('div')
