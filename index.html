@@ -12,18 +12,67 @@
     <img src="./img/logo.png">
   </header>
 
-  <section id="gameModeBtns">
-    <h3>Choose Your Difficulty</h3>
-    <div class="btn-wrap">
-      <button class="game-mode-btn easy" data-mode="easy"><i class="fas fa-fire"></i> Mild</button>
-      <button class="game-mode-btn medium" data-mode="medium"><i class="fas fa-pepper-hot"></i> Spicy</button>
-      <button class="game-mode-btn hard" data-mode="hard"><i class="fas fa-book-dead"></i> Diablo</button>
+  <!-- Game -->
+  <section class="game-wrap">
+    <div class="playerBoard sideBoard">
+      
+    </div>
+    <div id="shootout" class="gameBoard">
+      
+    </div>
+    <div class="trailBoard sideBoard">
+      
     </div>
   </section>
 
-  <section id="shootout" class="memory-game">
-    
+
+  <section class="home-panel">
+    <!-- Mode Buttons -->
+    <div id="gameModeBtns">
+      <h3>Choose Your Difficulty</h3>
+      <div class="btn-wrap">
+        <button class="game-mode-btn easy" data-mode="easy"><i class="fas fa-fire"></i> Mild</button>
+        <button class="game-mode-btn medium" data-mode="medium"><i class="fas fa-pepper-hot"></i> Spicy</button>
+        <button class="game-mode-btn hard" data-mode="hard"><i class="fas fa-book-dead"></i> Diablo</button>
+      </div>
+    </div>
+  
+    <!-- Player Details -->
+    <div class="player-details">
+      <h3>Traveler Name</h3>
+      <input type="text" name="">
+      <h3>Traveling From:</h3>
+      <input type="text">
+    </div>
+
+    <!-- Rules -->
+    <div class="rules">
+      <h3>The Rules are Simple</h3>
+      <h4>How to Win</h4>
+      <p class="win">Safely traverse the trail to the town Taco El Burrito</p>
+      <ol>
+        <li>
+          <h4>Rule One</h4>
+          <p>This is the first rule.</p>
+        </li>
+        <li>
+          <h4>Rule Two</h4>
+          <p>This is the second rule.</p>
+        </li>
+        <li>
+          <h4>Rule Three</h4>
+          <p>This is the Third rule.</p>
+        </li>
+      </ol>
+    </div>
+
+    <!-- Start -->
+    <button id="startGame">
+      Start Game
+    </button>
   </section>
+  
+
 
   <script src="./scripts.js"></script>
 </body>
