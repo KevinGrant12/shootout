@@ -1,13 +1,13 @@
 :root {
   --green: #1BA479;
-  --greenDark: #158761;
+  --greenDark: #12845E;
   --yellow: #F1A820;
-
   --purple: #40263E;
   --purpleHover: #331e32;
-
   --red: #BB262F;
+  --redDark: #A31F2C;
   --orange: #F05630;
+  --orangeDark: #D14428;
 
   --body: #130b12;
 }
@@ -20,7 +20,63 @@ body {
   height: 100vh;
   display: flex;
   background: var(--body);
+  flex-flow: column;
 }
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+header img {
+  width: 34rem;
+}
+
+#gameModeBtns {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#gameModeBtns h3 {
+  color: #fff;
+  margin-bottom: 1rem;
+}
+#gameModeBtns .btn-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#gameModeBtns button {
+  color: #fff;
+  border: none;
+  padding: .5rem 1rem;
+  margin: .5rem;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+#gameModeBtns .easy {
+  background: var(--green);
+}
+#gameModeBtns .medium {
+  background: var(--orange);
+}
+#gameModeBtns .hard {
+  background: var(--red);
+}
+#gameModeBtns .easy:hover {
+  background: var(--greenDark);
+}
+#gameModeBtns .medium:hover {
+  background: var(--orangeDark);
+}
+#gameModeBtns .hard:hover {
+  background: var(--redDark);
+}
+#gameModeBtns button i {
+  margin-right: .5rem;
+}
+
 .memory-game {
   width: 640px;
   height: 640px;

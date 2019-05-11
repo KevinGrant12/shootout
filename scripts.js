@@ -1,5 +1,5 @@
 const game = document.getElementById('shootout')
-const cards = document.querySelectorAll('.memory-card')
+// const cards = document.querySelectorAll('.memory-card')
 
 let hasFlippedCard = false
 let lockBoard = false
@@ -28,7 +28,6 @@ class Card {
     card.dataset.health = this.health
     card.dataset.ammo = this.ammo
     this.addImages(card)
-    // game.appendChild(card)
     return card
   }
 }
@@ -87,7 +86,6 @@ function selectGameMode(e) {
 }
 
 function dealCards(cardAmounts) {
-
   // Good Cards
   const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
   const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCard())
@@ -105,7 +103,14 @@ function dealCards(cardAmounts) {
   const goodCards = [...ammoCards, ...beerCards, ...foodCards, ...cigarCards]
   const badCards = [...snakeCards, ...scorpionCards, ...enemigoCards, ...banditoCards, ...rivalCards]
   const allCards = [...goodCards, ...badCards]
-  allCards.map(card => game.appendChild(card))
+
+  // Deal Cards Randomly
+  allCards.forEach(card => {
+    let randomPos = Math.floor(Math.random() * allCards.length)
+    card.style.order = randomPos
+    console.log(card)
+    game.appendChild(card)
+  })
 }
 
 function flipCard() {
@@ -152,12 +157,5 @@ function resetBoard() {
   [firstCard, secondCard] = [null,null]
 }
 
-(function shuffle() {
-  console.log('shuffle')
-  cards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * 12)
-    card.style.order = randomPos
-  })
-})()
 
 cards.forEach(card => card.addEventListener('click', flipCard))
