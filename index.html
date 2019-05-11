@@ -12,21 +12,8 @@
     <img src="./img/logo.png">
   </header>
 
-  <!-- Game -->
-  <section class="game-wrap">
-    <div class="playerBoard sideBoard">
-      
-    </div>
-    <div id="shootout" class="gameBoard">
-      
-    </div>
-    <div class="trailBoard sideBoard">
-      
-    </div>
-  </section>
-
-
-  <section class="home-panel">
+  <!-- Home Screen -->
+  <section class="home-screen active">
     <!-- Mode Buttons -->
     <div id="gameModeBtns">
       <h3>Choose Your Difficulty</h3>
@@ -44,24 +31,26 @@
       <h3>Traveling From:</h3>
       <input type="text">
     </div>
+  </section>
 
-    <!-- Rules -->
+  <!-- Rules Screen -->
+  <section class="rules-screen">
     <div class="rules">
       <h3>The Rules are Simple</h3>
       <h4>How to Win</h4>
       <p class="win">Safely traverse the trail to the town Taco El Burrito</p>
       <ol>
         <li>
-          <h4>Rule One</h4>
-          <p>This is the first rule.</p>
+          <h4>Select Cards</h4>
+          <p>Select two cards and try to match them.</p>
         </li>
         <li>
-          <h4>Rule Two</h4>
-          <p>This is the second rule.</p>
+          <h4>Good Cards</h4>
+          <p>A match will move you to the next location on the trail. Matching good cards will help you with health and ammo.
         </li>
         <li>
-          <h4>Rule Three</h4>
-          <p>This is the Third rule.</p>
+          <h4>Bad Cards</h4>
+          Matching bad cards will prevent losing health and ammo. <br><span>Mismatching bad cards has consequences!</span></p>
         </li>
       </ol>
     </div>
@@ -70,6 +59,19 @@
     <button id="startGame">
       Start Game
     </button>
+  </section>
+
+  <!-- Game Screen -->
+  <section class="game-screen">
+    <div class="playerBoard sideBoard">
+      
+    </div>
+    <div id="shootout" class="gameBoard">
+      
+    </div>
+    <div class="trailBoard sideBoard">
+      
+    </div>
   </section>
   
 

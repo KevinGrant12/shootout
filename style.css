@@ -34,18 +34,21 @@ header img {
   width: 34rem;
 }
 
-/*Home Panel*/
-.home-panel {
+/*Home Screen*/
+.home-screen {
   position: absolute;
   top: 50%;
   left: 50%;
-  display: flex;
+  display: none;
   flex-flow: column;
   align-items: center;
   justify-content: center;
   transform: translate(-50%,-50%);
 }
-.home-panel button {
+.home-screen.active {
+  display: flex;
+}
+.home-screen button {
   cursor: pointer;
   border: none;
   outline: none;
@@ -115,7 +118,7 @@ header img {
   display: flex;
   flex-flow: column;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .player-details h3 {
   color: #fff;
@@ -124,14 +127,29 @@ header img {
 .player-details input {
   border: none;
   margin-bottom: 1rem;
+  padding: .25rem .5rem;
+  outline: none;
+  border: 1px solid transparent;
+  color: #fff;
+  background: #67275f;
+}
+.player-details input:focus {
+  border: 1px solid var(--yellow);
 }
 
 /*Rules*/
+.rules-screen {
+  display: none;
+}
+.rules-screen.actve {
+  display: flex;
+}
 .rules {
   margin-bottom: 2rem;
   display: flex;
   flex-flow: column;
   align-items: center;
+  max-width: 50%;
 }
 .rules h3 {
   color: #fff;
@@ -148,15 +166,22 @@ header img {
   color: #fff;
 }
 .rules ol li {
-  margin-bottom: .25rem;
+  margin-bottom: .5rem;
+}
+.rules ol li span {
+  color: var(--red);
 }
 
 
 
-/*Player Board*/
-.game-wrap {
+/*Game Screen*/
+.game-screen {
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
+  display: none;
+}
+.game-screen.active {
+  display: grid;
 }
 .sideBoard {
   background: purple;
@@ -183,7 +208,7 @@ header img {
   transform-style: preserve-3d;
   transition: transform .5s;
 }
-.memory-card:active {
+.memory-card.active {
   transform: scale(0.97);
   transition: all .2s;
 }
