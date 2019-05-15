@@ -5,6 +5,13 @@ let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
 
+// class Player {
+//   constructor(name, location) {
+//     this.name = name
+//     this.location = location
+//   }
+// }
+
 class Card {
   constructor(name, imgUrl, health, ammo) {
     this.name = name
@@ -75,16 +82,29 @@ const gameModeToAmounts = new Map([
   ],
 ])
 
-const gameModeBtns = document.querySelectorAll('.game-mode-btn').forEach(btn => btn.addEventListener('click', selectGameMode))
+// User Game Setup
+const gameModeBtns = document.querySelectorAll('.game-mode-btn').forEach(btn => btn.addEventListener('click', setGameMode))
+const playerName = document.getElementById('playerName')
+// playerNameInput.addEventListener('oninput', setPlayerDetails())
+const locationInput = document.getElementById('locationInput')
 
-function selectGameMode(e) {
+// Select Game Mode
+function setGameMode(e) {
   let gameMode = e.target.getAttribute('data-mode')
-  const cardAmounts = gameModeToAmounts.get(gameMode)
-  console.log(gameMode)
-  document.querySelector('#gameModeBtns').style.display = 'none'
-  dealCards(cardAmounts)
+  localStorage.setItem("shootoutGameMode", gameMode)
 }
 
+// Player Details
+function setPlayerDetails(e) {
+  console.log(playerName.value)
+  localStorage.setItem('shootoutPlayerName', playerName.value)
+}
+
+
+  // const cardAmounts = gameModeToAmounts.get(gameMode)
+  // console.log(gameMode)
+  // document.querySelector('#gameModeBtns').style.display = 'none'
+  // dealCards(cardAmounts)
 function dealCards(cardAmounts) {
   // Good Cards
   const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
@@ -158,4 +178,4 @@ function resetBoard() {
 }
 
 
-cards.forEach(card => card.addEventListener('click', flipCard))
+// cards.forEach(card => card.addEventListener('click', flipCard))

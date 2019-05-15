@@ -34,16 +34,35 @@ header img {
   width: 34rem;
 }
 
-/*Home Screen*/
-.home-screen {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+/*+++++++++++*/
+  /*MASTER*/
+/*+++++++++++*/
+.master-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  overflow: hidden;
+}
+.screen {
   display: none;
-  flex-flow: column;
+  padding: 4rem;
+  flex: 1;
+  height: 100%;
   align-items: center;
   justify-content: center;
-  transform: translate(-50%,-50%);
+}
+.sideBoard {
+  border-radius: 5px;
+  background: var(--sideBoard);
+  width: 15%;
+}
+
+/*+++++++++++*/
+  /*HOME SCREEN*/
+/*+++++++++++*/
+.home-screen {
+  flex-flow: column;
 }
 .home-screen.active {
   display: flex;
@@ -137,9 +156,13 @@ header img {
   border: 1px solid var(--yellow);
 }
 
-/*Rules*/
+/*-------------------------------------------------------*/
+
+/*+++++++++++*/
+  /*RULES SCREEN*/
+/*+++++++++++*/
 .rules-screen {
-  display: none;
+  flex-flow:column;
 }
 .rules-screen.actve {
   display: flex;
@@ -172,33 +195,22 @@ header img {
   color: var(--red);
 }
 
+/*-------------------------------------------------------*/
 
-
-/*Game Screen*/
+/*+++++++++++*/
+  /*GAME SCREEN*/
+/*+++++++++++*/
 .game-screen {
-  display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  display: none;
-}
-.game-screen.active {
-  display: grid;
-}
-.sideBoard {
-  background: purple;
-  border-radius: 5px;
-  background: #251623;
-}
-/*Game Board*/
-.gameBoard {
   width: 100%;
-  height: 70vh;
-  margin: auto;
-  display: grid;
+  height: 100%;
   grid-template-rows: 3;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1rem;
-  padding: 1rem;
   perspective: 1000px;
+}
+.game-screen.active {
+  display: grid;
 }
 .memory-card {
   position: relative;

@@ -12,68 +12,65 @@
     <img src="./img/logo.png">
   </header>
 
-  <!-- Home Screen -->
-  <section class="home-screen active">
-    <!-- Mode Buttons -->
-    <div id="gameModeBtns">
-      <h3>Choose Your Difficulty</h3>
-      <div class="btn-wrap">
-        <button class="game-mode-btn easy" data-mode="easy"><i class="fas fa-fire"></i> Mild</button>
-        <button class="game-mode-btn medium" data-mode="medium"><i class="fas fa-pepper-hot"></i> Spicy</button>
-        <button class="game-mode-btn hard" data-mode="hard"><i class="fas fa-book-dead"></i> Diablo</button>
-      </div>
-    </div>
-  
-    <!-- Player Details -->
-    <div class="player-details">
-      <h3>Traveler Name</h3>
-      <input type="text" name="">
-      <h3>Traveling From:</h3>
-      <input type="text">
-    </div>
-  </section>
+  <!-- Master Game Wrap -->
+  <div class="master-wrap">
+    <!-- Left SideBoard -->
+    <div class="playerBoard sideBoard"></div>
 
-  <!-- Rules Screen -->
-  <section class="rules-screen">
-    <div class="rules">
-      <h3>The Rules are Simple</h3>
-      <h4>How to Win</h4>
-      <p class="win">Safely traverse the trail to the town Taco El Burrito</p>
-      <ol>
-        <li>
-          <h4>Select Cards</h4>
-          <p>Select two cards and try to match them.</p>
-        </li>
-        <li>
-          <h4>Good Cards</h4>
-          <p>A match will move you to the next location on the trail. Matching good cards will help you with health and ammo.
-        </li>
-        <li>
-          <h4>Bad Cards</h4>
-          Matching bad cards will prevent losing health and ammo. <br><span>Mismatching bad cards has consequences!</span></p>
-        </li>
-      </ol>
-    </div>
+      <!-- Home Screen -->
+      <section class="screen home-screen active">
+        <div id="gameModeBtns">
+          <h3>Choose Your Difficulty</h3>
+          <div class="btn-wrap">
+            <button class="game-mode-btn easy" data-mode="easy"><i class="fas fa-fire"></i> Mild</button>
+            <button class="game-mode-btn medium" data-mode="medium"><i class="fas fa-pepper-hot"></i> Spicy</button>
+            <button class="game-mode-btn hard" data-mode="hard"><i class="fas fa-book-dead"></i> Diablo</button>
+          </div>
+        </div>
 
-    <!-- Start -->
-    <button id="startGame">
-      Start Game
-    </button>
-  </section>
+        <div class="player-details">
+          <h3>Traveler Name</h3>
+          <input id="playerName" type="text" name="name" oninput="setPlayerDetails()">
+          <h3>Traveling From:</h3>
+          <input id="playerLocation" type="text" name="location">
+        </div>
+      </section>
 
-  <!-- Game Screen -->
-  <section class="game-screen">
-    <div class="playerBoard sideBoard">
-      
-    </div>
-    <div id="shootout" class="gameBoard">
-      
-    </div>
-    <div class="trailBoard sideBoard">
-      
-    </div>
-  </section>
-  
+      <!-- Rules Screen -->
+      <section class="screen rules-screen">
+        <div class="rules">
+          <h3>The Rules are Simple</h3>
+          <h4>How to Win</h4>
+          <p class="win">Safely traverse the trail to the town Taco El Burrito</p>
+          <ol>
+            <li>
+              <h4>Select Cards</h4>
+              <p>Select two cards and try to match them.</p>
+            </li>
+            <li>
+              <h4>Good Cards</h4>
+              <p>A match will move you to the next location on the trail. Matching good cards will help you with health and ammo.
+            </li>
+            <li>
+              <h4>Bad Cards</h4>
+              Matching bad cards will prevent losing health and ammo. <br><span>Mismatching bad cards has consequences!</span></p>
+            </li>
+          </ol>
+        </div>
+
+        <button id="startGame">
+          Start Game
+        </button>
+      </section>
+
+      <!-- Game Screen -->
+      <section id="shooout" class="screen game-screen gameBoard">
+        
+      </section>
+
+    <!-- Right SideBoard -->
+    <div class="trailBoard sideBoard"></div>
+  </div>
 
 
   <script src="./scripts.js"></script>
