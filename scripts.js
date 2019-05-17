@@ -83,27 +83,59 @@ const gameModeToAmounts = new Map([
 ])
 
 // User Game Setup
-const gameModeBtns = document.querySelectorAll('.game-mode-btn').forEach(btn => btn.addEventListener('click', setGameMode))
+const gameModeOptions = document.querySelectorAll('.game-mode-btn');
+gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
 const playerName = document.getElementById('playerName')
 // playerNameInput.addEventListener('oninput', setPlayerDetails())
 const locationInput = document.getElementById('locationInput')
 
 // Select Game Mode
+let gameMode = ""
 function setGameMode(e) {
-  let gameMode = e.target.getAttribute('data-mode')
-  localStorage.setItem("shootoutGameMode", gameMode)
-}
+  gameMode = e.target.getAttribute('data-mode');
+  gameModeOptions.forEach(option => option.classList.remove('active'));
+  e.target.classList.add('active');
+  localStorage.setItem("shootoutGameMode", gameMode);
+  showGameModeMessage(gameMode);
+};
+
+
+// Display game mode message
+const gameModeMessage = document.querySelector('#gameModeMessage');
+function showGameModeMessage(gameMode) {
+  console.log('showGameModeMessage');
+  let message = ""
+  switch (gameMode) {
+    case "easy":
+      message = "Your soul is weak! A sissy girl who thinks Taco Bell hot sauce is spicy. You won't last long on the trail!";
+      console.log('easy')
+      break;
+    case "medium":
+      message = "Fancy yourself a sharpshooter?";
+      console.log('medium')
+      break;
+    case "hard":
+      message = 'A seasoned traveler - birthed wielding a revolver with a golden hammer. You destroy all who stand in your way. Be weary of this hardened path or you will be filled with bullet holes before you can say "El Chalupa Cabra"';
+      console.log('hard')
+      break;
+  }
+
+  gameModeMessage.classList.add('visible');
+  gameModeMessage.innerHTML = message
+};
+
+
+
 
 // Player Details
 function setPlayerDetails(e) {
   console.log(playerName.value)
   localStorage.setItem('shootoutPlayerName', playerName.value)
-}
-
+};
 
   // const cardAmounts = gameModeToAmounts.get(gameMode)
   // console.log(gameMode)
-  // document.querySelector('#gameModeBtns').style.display = 'none'
+  // document.querySelector('#gameModeOptions').style.display = 'none'
   // dealCards(cardAmounts)
 function dealCards(cardAmounts) {
   // Good Cards

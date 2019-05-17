@@ -77,59 +77,75 @@ header img {
 }
 
 /*Game Mode Buttons*/
-#gameModeBtns {
+#gameModeOptions {
   display: flex;
   flex-flow: column;
   align-items: center;
   margin-bottom: 2rem;
 }
-#gameModeBtns h3 {
+#gameModeOptions h3 {
   color: #fff;
   margin-bottom: 1rem;
 }
-#gameModeBtns .btn-wrap {
+#gameModeOptions .btn-wrap {
   display: flex;
   align-items: center;
   justify-content: center;
 }
-#gameModeBtns button {
+#gameModeOptions button {
   color: #fff;
   cursor: pointer;
   transition: all .3s ease;
 }
-#gameModeBtns button.easy {
+#gameModeOptions button.easy {
   background: var(--green);
 }
-#gameModeBtns button.medium {
+#gameModeOptions button.medium {
   background: var(--orange);
 }
-#gameModeBtns button.hard {
+#gameModeOptions button.hard {
   background: var(--red);
 }
-#gameModeBtns button.easy:hover {
+#gameModeOptions button.easy:hover {
   background: var(--greenDark);
 }
-#gameModeBtns button.medium:hover {
+#gameModeOptions button.medium:hover {
   background: var(--orangeDark);
 }
-#gameModeBtns button.hard:hover {
+#gameModeOptions button.hard:hover {
   background: var(--redDark);
 }
-#gameModeBtns button i {
+#gameModeOptions button i {
   margin-right: .5rem;
 }
-#gameModeBtns button.easy i {
+#gameModeOptions button.easy i {
   color: var(--greenDark);
 }
-#gameModeBtns button.medium i {
+#gameModeOptions button.medium i {
   color: var(--orangeDark);
 }
-#gameModeBtns button.hard i {
+#gameModeOptions button.hard i {
   color: var(--redDark);
 }
-#gameModeBtns button:hover i {
+#gameModeOptions button:hover i,
+#gameModeOptions button.active i {
   color: var(--yellow);  
   transform: scale(1.1);
+}
+/*Game Mode Message*/
+#gameModeMessage {
+  height: 60px;
+  max-width: 80%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  color: #fff;
+  margin-top: 1rem;
+}
+#gameModeMessage.visible {
+  visibility: visible;;
 }
 
 /*Player Details*/
