@@ -85,18 +85,22 @@ const playerName = document.getElementById('playerName');
 const playerLocation = document.getElementById('playerLocation');
 const playerDetails = document.getElementById('playerDetails');
 
+const gameModeMessage = document.getElementById('gameModeMessage');
+let gameModeMessageText = ""
+
+
 // Set Player Name
 function setPlayerName() {
   localStorage.setItem('shootoutPlayerName', playerName.value);
   console.log(localStorage.getItem('shootoutPlayerName'));
-  upDateGameModeMessage()
+  upDateGameModeMessage();
 };
 
 // Set Player Location
 function setPlayerLocation() {
   localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
   console.log(localStorage.getItem('shootoutPlayerLocation'));
-  upDateGameModeMessage()
+  upDateGameModeMessage();
 };
 
 // Select Game Mode
@@ -107,10 +111,6 @@ function setGameMode(e) {
   localStorage.setItem("shootoutGameMode", gameMode);
   showGameModeMessage(gameMode);
 };
-
-// Display game mode message
-const gameModeMessage = document.querySelector('#gameModeMessage');
-let gameModeMessageText = ""
 
 // Show Game Mode Message
 function showGameModeMessage(gameMode) {
@@ -138,14 +138,16 @@ function showGameModeMessage(gameMode) {
 function upDateGameModeMessage() {
   const playerNameValue = playerName.value;
   const playerLocationValue = playerLocation.value;
-  if ( playerNameValue) {
+  if ( playerNameValue && !playerLocationValue) {
     gameModeMessage.innerHTML = `Howdy! <br> My name is ${playerNameValue}.`;
     playerLocation.removeAttribute('disabled');
-  }
-  if (playerNameValue && playerLocationValue) {
+  } else if (playerNameValue && playerLocationValue) {
+    gameModeMessage.innerHTML = `Howdy! <br> My name is ${playerNameValue}. <br> I come from ${playerLocationValue}`; 
     gameModeOptions.forEach(option => option.removeAttribute('disabled'));
-  }
-  else {
+    playerLocation.removeAttribute('disabled');
+  } else if (!playerNameValue && playerLocationValue) {
+    playerLocation.setAttribute('disabled', true);
+  } else {
     gameModeOptions.forEach(option => option.setAttribute('disabled', true));
   }
 };
