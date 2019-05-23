@@ -97,6 +97,10 @@ header img {
   cursor: pointer;
   transition: all .3s ease;
 }
+#gameModeOptions button[disabled="true"] {
+  opacity: 0.6;
+  pointer-events: none;
+}
 #gameModeOptions button.easy {
   background: var(--green);
 }
@@ -117,6 +121,7 @@ header img {
 }
 #gameModeOptions button i {
   margin-right: .5rem;
+  pointer-events: none;
 }
 #gameModeOptions button.easy i {
   color: var(--greenDark);
@@ -140,12 +145,8 @@ header img {
   text-align: center;
   align-items: center;
   justify-content: center;
-  visibility: hidden;
   color: #fff;
   margin-top: 1rem;
-}
-#gameModeMessage.visible {
-  visibility: visible;;
 }
 
 /*Player Details*/
@@ -170,6 +171,9 @@ header img {
 }
 .player-details input:focus {
   border: 1px solid var(--yellow);
+}
+.player-details input[disabled="true"] {
+  opacity: 0.6;
 }
 
 /*-------------------------------------------------------*/

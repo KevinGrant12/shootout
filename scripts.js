@@ -1,16 +1,8 @@
 const game = document.getElementById('shootout')
-// const cards = document.querySelectorAll('.memory-card')
 
 let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
-
-// class Player {
-//   constructor(name, location) {
-//     this.name = name
-//     this.location = location
-//   }
-// }
 
 class Card {
   constructor(name, imgUrl, health, ammo) {
@@ -80,17 +72,34 @@ const gameModeToAmounts = new Map([
       rival: 4
     }
   ],
-])
+]);
 
-// User Game Setup
+
+
+// New Game Configuration
 const gameModeOptions = document.querySelectorAll('.game-mode-btn');
 gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
-const playerName = document.getElementById('playerName')
-// playerNameInput.addEventListener('oninput', setPlayerDetails())
-const locationInput = document.getElementById('locationInput')
+let gameMode = ""
+
+const playerName = document.getElementById('playerName');
+const playerLocation = document.getElementById('playerLocation');
+const playerDetails = document.getElementById('playerDetails');
+
+// Set Player Name
+function setPlayerName() {
+  localStorage.setItem('shootoutPlayerName', playerName.value);
+  console.log(localStorage.getItem('shootoutPlayerName'));
+  upDateGameModeMessage()
+};
+
+// Set Player Location
+function setPlayerLocation() {
+  localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
+  console.log(localStorage.getItem('shootoutPlayerLocation'));
+  upDateGameModeMessage()
+};
 
 // Select Game Mode
-let gameMode = ""
 function setGameMode(e) {
   gameMode = e.target.getAttribute('data-mode');
   gameModeOptions.forEach(option => option.classList.remove('active'));
@@ -99,44 +108,57 @@ function setGameMode(e) {
   showGameModeMessage(gameMode);
 };
 
-
 // Display game mode message
 const gameModeMessage = document.querySelector('#gameModeMessage');
+let gameModeMessageText = ""
+
+// Show Game Mode Message
 function showGameModeMessage(gameMode) {
   console.log('showGameModeMessage');
-  let message = ""
   switch (gameMode) {
     case "easy":
-      message = "Your soul is weak! A sissy girl who thinks Taco Bell hot sauce is spicy. You won't last long on the trail!";
-      console.log('easy')
+      gameModeMessageText = "Your soul is weak! A sissy girl who thinks Taco Bell hot sauce is spicy. You won't last long on the trail!";
+      console.log('easy');
       break;
     case "medium":
-      message = "Fancy yourself a sharpshooter?";
-      console.log('medium')
+      gameModeMessageText = "Fancy yourself a sharpshooter?";
+      console.log('medium');
       break;
     case "hard":
-      message = 'A seasoned traveler - birthed wielding a revolver with a golden hammer. You destroy all who stand in your way. Be weary of this hardened path or you will be filled with bullet holes before you can say "El Chalupa Cabra"';
-      console.log('hard')
+      gameModeMessageText = 'A seasoned traveler - birthed wielding a revolver with a golden hammer. You destroy all who stand in your way. Be weary of this hardened path or you will be filled with bullet holes before you can say "El Chalupa Cabra"';
+      console.log('hard');
       break;
   }
-
-  gameModeMessage.classList.add('visible');
-  gameModeMessage.innerHTML = message
+        
+  gameModeMessage.innerHTML = gameModeMessageText;
 };
 
 
-
-
-// Player Details
-function setPlayerDetails(e) {
-  console.log(playerName.value)
-  localStorage.setItem('shootoutPlayerName', playerName.value)
+// Update Game Mode Message
+function upDateGameModeMessage() {
+  const playerNameValue = playerName.value;
+  const playerLocationValue = playerLocation.value;
+  if ( playerNameValue) {
+    gameModeMessage.innerHTML = `Howdy! <br> My name is ${playerNameValue}.`;
+    playerLocation.removeAttribute('disabled');
+  }
+  if (playerNameValue && playerLocationValue) {
+    gameModeOptions.forEach(option => option.removeAttribute('disabled'));
+  }
+  else {
+    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
+  }
 };
 
-  // const cardAmounts = gameModeToAmounts.get(gameMode)
-  // console.log(gameMode)
-  // document.querySelector('#gameModeOptions').style.display = 'none'
-  // dealCards(cardAmounts)
+
+// function setPlayerDetails() {
+  
+// };
+  
+// const cardAmounts = gameModeToAmounts.get(gameMode)
+// console.log(gameMode)
+// document.querySelector('#gameModeOptions').style.display = 'none'
+// dealCards(cardAmounts)
 function dealCards(cardAmounts) {
   // Good Cards
   const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())

@@ -19,22 +19,26 @@
 
       <!-- Home Screen -->
       <section class="screen home-screen active">
+        <div class="player-details">
+          <h3>Traveler Name</h3>
+          <input id="playerName" type="text" name="name" oninput="setPlayerName()">
+          <h3>Traveling From:</h3>
+          <input id="playerLocation" type="text" name="location" oninput="setPlayerLocation()" disabled="true">
+        </div>
+
         <div id="gameModeOptions">
           <h3>Choose Your Difficulty</h3>
           <div class="btn-wrap">
-            <button class="game-mode-btn easy" data-mode="easy"><i class="fas fa-fire"></i> Mild</button>
-            <button class="game-mode-btn medium" data-mode="medium"><i class="fas fa-pepper-hot"></i> Spicy</button>
-            <button class="game-mode-btn hard" data-mode="hard"><i class="fas fa-book-dead"></i> Diablo</button>
+            <button class="game-mode-btn easy" data-mode="easy" disabled="true"><i class="fas fa-fire"></i> Mild</button>
+            <button class="game-mode-btn medium" data-mode="medium" disabled="true"><i class="fas fa-pepper-hot"></i> Spicy</button>
+            <button class="game-mode-btn hard" data-mode="hard" disabled="true"><i class="fas fa-book-dead"></i> Diablo</button>
           </div>
           <div id="gameModeMessage"></div>
         </div>
 
-        <div class="player-details">
-          <h3>Traveler Name</h3>
-          <input id="playerName" type="text" name="name" oninput="setPlayerDetails()">
-          <h3>Traveling From:</h3>
-          <input id="playerLocation" type="text" name="location">
-        </div>
+        <div id="playerDetails"></div>
+
+        <button id="toRulesScreen" disabled="true">Continue</button>
       </section>
 
       <!-- Rules Screen -->
