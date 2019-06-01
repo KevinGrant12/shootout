@@ -20,10 +20,10 @@
       <!-- Home Screen -->
       <section class="screen home-screen active">
         <div class="player-details">
-          <h3>Traveler Name</h3>
-          <input id="playerName" type="text" name="name" oninput="setPlayerName()">
-          <h3>Home Town:</h3>
-          <input id="playerLocation" type="text" name="location" oninput="setPlayerLocation()" disabled="true">
+          <h3>Name:</h3>
+          <input id="playerName" type="text" name="name" placeholder="What is your name?" autofocus oninput="updateNewGameMessages()">
+          <h3>Town:</h3>
+          <input id="playerLocation" type="text" name="location" placeholder="Where are do you hail from?" oninput="updateNewGameMessages()" disabled="true">
         </div>
 
         <div id="gameModeOptions">
@@ -33,7 +33,9 @@
             <button class="game-mode-btn medium" data-mode="medium" disabled="true"><i class="fas fa-pepper-hot"></i> Spicy</button>
             <button class="game-mode-btn hard" data-mode="hard" disabled="true"><i class="fas fa-book-dead"></i> Diablo</button>
           </div>
-          <div id="gameModeMessage"></div>
+          <p id="playerNameMessage" class="newGameMessage"></p>
+          <p id="playerLocationMessage" class="newGameMessage"></p>
+          <p id="gameModeMessage" class="newGameMessage"></p>
         </div>
 
         <div id="playerDetails"></div>

@@ -76,86 +76,128 @@ const gameModeToAmounts = new Map([
 
 
 
-// New Game Configuration
+// Home Screen Configuration
+// ===================================================================================//
 const gameModeOptions = document.querySelectorAll('.game-mode-btn');
-gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
-let gameMode = ""
+const toRulesScreenBtn = document.getElementById('toRulesScreen');
+let gameMode = "";
 
 const playerName = document.getElementById('playerName');
 const playerLocation = document.getElementById('playerLocation');
 const playerDetails = document.getElementById('playerDetails');
 
 const gameModeMessage = document.getElementById('gameModeMessage');
-let gameModeMessageText = ""
+const playerNameMessage = document.getElementById('playerNameMessage');
+const playerLocationMessage = document.getElementById('playerLocationMessage');
 
+// Event listener for game mode buttons
+gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
 
 // Set Player Name
-function setPlayerName() {
-  localStorage.setItem('shootoutPlayerName', playerName.value);
-  console.log(localStorage.getItem('shootoutPlayerName'));
-  upDateGameModeMessage();
-};
+// function setPlayerName() {
+//   localStorage.setItem('shootoutPlayerName', playerName.value);
+//   console.log(localStorage.getItem('shootoutPlayerName'));
+//   updateNewGameMessages();
+// };
 
 // Set Player Location
-function setPlayerLocation() {
-  localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
-  console.log(localStorage.getItem('shootoutPlayerLocation'));
-  upDateGameModeMessage();
-};
+// function setPlayerLocation() {
+//   localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
+//   console.log(localStorage.getItem('shootoutPlayerLocation'));
+//   updateNewGameMessages();
+// };
 
 // Select Game Mode
-function setGameMode(e) {
+function setGameMode(e, gameMode) {
   gameMode = e.target.getAttribute('data-mode');
   gameModeOptions.forEach(option => option.classList.remove('active'));
   e.target.classList.add('active');
   localStorage.setItem("shootoutGameMode", gameMode);
-  showGameModeMessage(gameMode);
+  updateNewGameMessages(gameMode);
 };
-
-// Show Game Mode Message
-function showGameModeMessage(gameMode) {
-  console.log('showGameModeMessage');
-  switch (gameMode) {
-    case "easy":
-      gameModeMessageText = "Your soul is weak! A sissy girl who thinks Taco Bell hot sauce is spicy. You won't last long on the trail!";
-      console.log('easy');
-      break;
-    case "medium":
-      gameModeMessageText = "Fancy yourself a sharpshooter?";
-      console.log('medium');
-      break;
-    case "hard":
-      gameModeMessageText = 'A seasoned traveler - birthed wielding a revolver with a golden hammer. You destroy all who stand in your way. Be weary of this hardened path or you will be filled with bullet holes before you can say "El Chalupa Cabra"';
-      console.log('hard');
-      break;
-  }
-        
-  gameModeMessage.innerHTML = gameModeMessageText;
-};
-
 
 // Update Game Mode Message
-function upDateGameModeMessage() {
-  const playerNameValue = playerName.value;
-  const playerLocationValue = playerLocation.value;
-  if ( playerNameValue && !playerLocationValue) {
-    gameModeMessage.innerHTML = `Howdy! <br> My name is ${playerNameValue}.`;
+function updateNewGameMessages(gameMode) {
+
+  localStorage.setItem('shootoutPlayerName', playerName.value);
+  console.log(localStorage.getItem('shootoutPlayerName'));
+  localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
+  console.log(localStorage.getItem('shootoutPlayerLocation'));
+
+  let playerNameIsSet,
+      playerLocationIsSet,
+      gameModeIsSet
+
+  if ( playerName.value ) {
+    playerNameIsSet = true;
+    playerNameMessage.innerHTML = `Muy Buenos! <br> They call me El ${playerName.value}.`;
     playerLocation.removeAttribute('disabled');
-  } else if (playerNameValue && playerLocationValue) {
-    gameModeMessage.innerHTML = `Howdy! <br> My name is ${playerNameValue}. <br> I come from ${playerLocationValue}`; 
-    gameModeOptions.forEach(option => option.removeAttribute('disabled'));
-    playerLocation.removeAttribute('disabled');
-  } else if (!playerNameValue && playerLocationValue) {
-    playerLocation.setAttribute('disabled', true);
   } else {
+    playerNameIsSet = false;
+    playerNameMessage.innerHTML = "";
+    playerLocation.setAttribute('disabled', true);
     gameModeOptions.forEach(option => option.setAttribute('disabled', true));
   }
-};
-
-
-// function setPlayerDetails() {
   
-// };
+  if ( playerName.value && playerLocation.value ) {
+    playerLocationIsSet = true;
+    playerLocationMessage.innerHTML = `I am a chicano hero from the town of ${playerLocation.value}`; 
+    gameModeOptions.forEach(option => option.removeAttribute('disabled'));
+  } else if ( playerName.value && !playerLocation.value ) {
+    playerLocationIsSet = false;
+    playerLocationMessage.innerHTML = "";
+    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
+  } else {
+    playerLocationIsSet = false;
+    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
+  }
+  
+
+  updateGameMode = () => {
+    // gameMode = localStorage.getItem('shootoutGameMode')
+    if ( !gameModeIsSet ) {
+      switch (gameMode) {
+        case "easy":
+          gameModeMessage.innerHTML = "I am a sissy girl who thinks Taco Bell hot sauce is spicy. The trail is scary and I will be bringing my mommy...";
+          gameModeIsSet = true;
+          console.log('easy');
+          break;
+        case "medium":
+          gameModeMessage.innerHTML = "Fancy yourself a sharpshooter?";
+          gameModeIsSet = true;
+          console.log('medium');
+          break;
+        case "hard":
+          gameModeMessage.innerHTML = 'I am a seasoned traveler who was birthed wielding a revolver with a golden hammer. I will destroy all who stand in my way before you can say "El Chalupa Cabra"';
+          gameModeIsSet = true;
+          console.log('hard');
+          break;
+      }
+    } else {
+      gameModeIsSet = false;
+    }
+  }
+
+  updateGameMode()
+
+  localStorage.setItem('playerNameIsSet', playerNameIsSet);
+  console.log({playerNameIsSet})
+  localStorage.setItem('playerLocationIsSet', playerLocationIsSet);
+  console.log({playerLocationIsSet})
+  localStorage.setItem('gameModeIsSet', gameModeIsSet);
+  console.log({gameModeIsSet})
+
+  if ( playerNameIsSet && playerLocationIsSet && gameModeIsSet ) {
+    toRulesScreenBtn.removeAttribute('disabled');
+  } else {
+    toRulesScreenBtn.setAttribute('disabled', true);
+  }
+};
+  
+// ===================================================================================//
+// /Home Screen Configuration
+          
+
   
 // const cardAmounts = gameModeToAmounts.get(gameMode)
 // console.log(gameMode)
