@@ -1,4 +1,4 @@
-const game = document.getElementById('shootout')
+const game = document.getElementById('game-screen')
 
 let hasFlippedCard = false
 let lockBoard = false
@@ -74,8 +74,6 @@ const gameModeToAmounts = new Map([
   ],
 ]);
 
-
-
 // Home Screen Configuration
 // ===================================================================================//
 const gameModeOptions = document.querySelectorAll('.game-mode-btn');
@@ -97,15 +95,15 @@ let gameModeIsSet = false;
 // Event listener for game mode buttons
 gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
 
-// Event listener for rules screen button
-toRulesScreenBtn.addEventListener('mouseup', goToRulesScreen)
-
-// Select Game Mode
 function setGameMode(e, gameMode) {
+
+  // Set game mode and store
   gameMode = e.target.getAttribute('data-mode');
+  localStorage.setItem("shootoutGameMode", gameMode);
+
+  // Toggle game mode button appearance
   gameModeOptions.forEach(option => option.classList.remove('active'));
   e.target.classList.add('active');
-  localStorage.setItem("shootoutGameMode", gameMode);
   updateNewGameMessages(gameMode);
 };
 
@@ -114,8 +112,6 @@ function updateNewGameMessages(gameMode) {
 
   localStorage.setItem('shootoutPlayerName', playerName.value);
   localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
-  // console.log(localStorage.getItem('shootoutPlayerName'));
-  // console.log(localStorage.getItem('shootoutPlayerLocation'));
 
   // Toggle playerNameIsSet and update player name message
   if ( playerName.value ) {
@@ -168,9 +164,6 @@ function updateNewGameMessages(gameMode) {
   localStorage.setItem('playerNameIsSet', playerNameIsSet);
   localStorage.setItem('playerLocationIsSet', playerLocationIsSet);
   localStorage.setItem('gameModeIsSet', gameModeIsSet);
-  // console.log({playerNameIsSet})
-  // console.log({playerLocationIsSet})
-  // console.log({gameModeIsSet})
 
   // Toggle toRulesScreen button
   if ( playerNameIsSet && playerLocationIsSet && gameModeIsSet ) {
@@ -179,22 +172,22 @@ function updateNewGameMessages(gameMode) {
     toRulesScreenBtn.setAttribute('disabled', true);
   }
 };
+// /Home Screen Configuration
 
+// Go to Rules Screen
+toRulesScreenBtn.addEventListener('mouseup', goToRulesScreen)
 function goToRulesScreen() {
   document.getElementById('home-screen').classList.remove('active');
   document.getElementById('rules-screen').classList.add('active');
 };
-  
-// ===================================================================================//
-// /Home Screen Configuration
-          
 
-  
-// const cardAmounts = gameModeToAmounts.get(gameMode)
-// console.log(gameMode)
-// document.querySelector('#gameModeOptions').style.display = 'none'
-// dealCards(cardAmounts)
-function dealCards(cardAmounts) {
+
+// const cardAmounts = gameModeToAmounts.get(localStorage.getItem('shootoutGameMode'));
+
+function dealCards() {
+  const cardAmounts = gameModeToAmounts.get(localStorage.getItem('shootoutGameMode'));
+  console.log({cardAmounts});
+
   // Good Cards
   const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
   const beerCards = [...Array(cardAmounts.beer)].map(i => new Card('beer', 'img/angular.svg', 1, null).createCard())
@@ -221,6 +214,16 @@ function dealCards(cardAmounts) {
     game.appendChild(card)
   })
 }
+
+// Start Game
+document.getElementById('startGame').addEventListener('mouseup', function() {
+  document.getElementById('rules-screen').classList.remove('active');
+  document.getElementById('game-screen').classList.add('active');
+  dealCards()
+})
+
+
+
 
 function flipCard() {
   if (lockBoard) return

@@ -45,7 +45,7 @@ header img {
 }
 .screen {
   display: none;
-  padding: 4rem;
+  padding: 1rem;
   flex: 1;
   height: 100%;
   align-items: center;
@@ -231,6 +231,7 @@ button.screen-nav-btn {
   display: grid;
 }
 .memory-card {
+  height: 100%;
   position: relative;
   box-shadow: 1px 1px 1px rgba(37, 21, 36, 0.8);
   transform: scale(1);
@@ -249,7 +250,7 @@ button.screen-nav-btn {
 .back-face {
   width: 100%;
   height: 100%;
-  padding: 1.25rem;
+  padding: 1rem;
   position: absolute;
   border-radius: 5px;
   background: var(--purple);
