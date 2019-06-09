@@ -18,12 +18,12 @@
     <div class="playerBoard sideBoard"></div>
 
       <!-- Home Screen -->
-      <section class="screen home-screen active">
+      <section class="screen active" id="home-screen">
         <div class="player-details">
           <h3>Name:</h3>
           <input id="playerName" type="text" name="name" placeholder="What is your name?" autofocus oninput="updateNewGameMessages()">
           <h3>Town:</h3>
-          <input id="playerLocation" type="text" name="location" placeholder="Where are do you hail from?" oninput="updateNewGameMessages()" disabled="true">
+          <input id="playerLocation" type="text" name="location" placeholder="Where do you hail from?" oninput="updateNewGameMessages()" disabled="true">
         </div>
 
         <div id="gameModeOptions">
@@ -40,11 +40,11 @@
 
         <div id="playerDetails"></div>
 
-        <button id="toRulesScreen" disabled="true">Continue</button>
+        <button id="toRulesScreen" class="screen-nav-btn" disabled="true">Continue</button>
       </section>
 
       <!-- Rules Screen -->
-      <section class="screen rules-screen">
+      <section class="screen rules-screen" id="rules-screen">
         <div class="rules">
           <h3>The Rules are Simple</h3>
           <h4>How to Win</h4>
@@ -65,13 +65,13 @@
           </ol>
         </div>
 
-        <button id="startGame">
+        <button id="startGame" class="screen-nav-btn">
           Start Game
         </button>
       </section>
 
       <!-- Game Screen -->
-      <section id="shooout" class="screen game-screen gameBoard">
+      <section id="shooout" class="screen game-screen gameBoard" id="game-screen">
         
       </section>
 

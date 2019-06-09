@@ -90,22 +90,15 @@ const gameModeMessage = document.getElementById('gameModeMessage');
 const playerNameMessage = document.getElementById('playerNameMessage');
 const playerLocationMessage = document.getElementById('playerLocationMessage');
 
+let playerNameIsSet = false;
+let playerLocationIsSet = false;
+let gameModeIsSet = false;
+
 // Event listener for game mode buttons
 gameModeOptions.forEach(btn => btn.addEventListener('click', setGameMode));
 
-// Set Player Name
-// function setPlayerName() {
-//   localStorage.setItem('shootoutPlayerName', playerName.value);
-//   console.log(localStorage.getItem('shootoutPlayerName'));
-//   updateNewGameMessages();
-// };
-
-// Set Player Location
-// function setPlayerLocation() {
-//   localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
-//   console.log(localStorage.getItem('shootoutPlayerLocation'));
-//   updateNewGameMessages();
-// };
+// Event listener for rules screen button
+toRulesScreenBtn.addEventListener('mouseup', goToRulesScreen)
 
 // Select Game Mode
 function setGameMode(e, gameMode) {
@@ -120,14 +113,11 @@ function setGameMode(e, gameMode) {
 function updateNewGameMessages(gameMode) {
 
   localStorage.setItem('shootoutPlayerName', playerName.value);
-  console.log(localStorage.getItem('shootoutPlayerName'));
   localStorage.setItem('shootoutPlayerLocation', playerLocation.value);
-  console.log(localStorage.getItem('shootoutPlayerLocation'));
+  // console.log(localStorage.getItem('shootoutPlayerName'));
+  // console.log(localStorage.getItem('shootoutPlayerLocation'));
 
-  let playerNameIsSet,
-      playerLocationIsSet,
-      gameModeIsSet
-
+  // Toggle playerNameIsSet and update player name message
   if ( playerName.value ) {
     playerNameIsSet = true;
     playerNameMessage.innerHTML = `Muy Buenos! <br> They call me El ${playerName.value}.`;
@@ -138,60 +128,61 @@ function updateNewGameMessages(gameMode) {
     playerLocation.setAttribute('disabled', true);
     gameModeOptions.forEach(option => option.setAttribute('disabled', true));
   }
-  
-  if ( playerName.value && playerLocation.value ) {
+
+  // Toggle playerLocationIsSet and update player location message
+  if ( playerLocation.value ) {
     playerLocationIsSet = true;
     playerLocationMessage.innerHTML = `I am a chicano hero from the town of ${playerLocation.value}`; 
-    gameModeOptions.forEach(option => option.removeAttribute('disabled'));
-  } else if ( playerName.value && !playerLocation.value ) {
-    playerLocationIsSet = false;
-    playerLocationMessage.innerHTML = "";
-    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
   } else {
     playerLocationIsSet = false;
-    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
+    playerLocationMessage.innerHTML = "";
   }
   
-
-  updateGameMode = () => {
-    // gameMode = localStorage.getItem('shootoutGameMode')
-    if ( !gameModeIsSet ) {
-      switch (gameMode) {
-        case "easy":
-          gameModeMessage.innerHTML = "I am a sissy girl who thinks Taco Bell hot sauce is spicy. The trail is scary and I will be bringing my mommy...";
-          gameModeIsSet = true;
-          console.log('easy');
-          break;
-        case "medium":
-          gameModeMessage.innerHTML = "Fancy yourself a sharpshooter?";
-          gameModeIsSet = true;
-          console.log('medium');
-          break;
-        case "hard":
-          gameModeMessage.innerHTML = 'I am a seasoned traveler who was birthed wielding a revolver with a golden hammer. I will destroy all who stand in my way before you can say "El Chalupa Cabra"';
-          gameModeIsSet = true;
-          console.log('hard');
-          break;
-      }
-    } else {
-      gameModeIsSet = false;
-    }
+  // Unlock gamemode buttons
+  if ( playerName.value && playerLocation.value ) {
+    gameModeOptions.forEach(option => option.removeAttribute('disabled'));
+  } else {
+    gameModeOptions.forEach(option => option.setAttribute('disabled', true));
   }
 
-  updateGameMode()
+  // Set the game mode message
+  switch (gameMode) {
+    case "easy":
+      gameModeMessage.innerHTML = "I am a sissy girl who thinks Taco Bell hot sauce is spicy. The trail is scary and I will be bringing my mommy...";
+      gameModeIsSet = true;
+      console.log('easy');
+      break;
+    case "medium":
+      gameModeMessage.innerHTML = "Fancy yourself a sharpshooter?";
+      gameModeIsSet = true;
+      console.log('medium');
+      break;
+    case "hard":
+      gameModeMessage.innerHTML = 'I am a seasoned traveler who was birthed wielding a revolver with a golden hammer. I will destroy all who stand in my way before you can say "El Chalupa Cabra"';
+      gameModeIsSet = true;
+      console.log('hard');
+      break;
+  }
 
+  // Set home screen booleans to local storage
   localStorage.setItem('playerNameIsSet', playerNameIsSet);
-  console.log({playerNameIsSet})
   localStorage.setItem('playerLocationIsSet', playerLocationIsSet);
-  console.log({playerLocationIsSet})
   localStorage.setItem('gameModeIsSet', gameModeIsSet);
-  console.log({gameModeIsSet})
+  // console.log({playerNameIsSet})
+  // console.log({playerLocationIsSet})
+  // console.log({gameModeIsSet})
 
+  // Toggle toRulesScreen button
   if ( playerNameIsSet && playerLocationIsSet && gameModeIsSet ) {
     toRulesScreenBtn.removeAttribute('disabled');
   } else {
     toRulesScreenBtn.setAttribute('disabled', true);
   }
+};
+
+function goToRulesScreen() {
+  document.getElementById('home-screen').classList.remove('active');
+  document.getElementById('rules-screen').classList.add('active');
 };
   
 // ===================================================================================//
