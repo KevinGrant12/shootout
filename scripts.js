@@ -3,6 +3,7 @@ const game = document.getElementById('game-screen')
 let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
+let cardDeck = [];
 
 class Card {
   constructor(name, imgUrl, health, ammo) {
@@ -22,16 +23,17 @@ class Card {
     }
   }
   createCard(imgUrl) {
-    let card = document.createElement('div')
-    card.className = 'memory-card ' + this.name
-    card.dataset.health = this.health
-    card.dataset.ammo = this.ammo
-    this.addImages(card)
-    return card
+    let card = document.createElement('div');
+    card.className = 'memory-card ' + this.name;
+    card.dataset.cardtype = this.name;
+    card.dataset.health = this.health;
+    card.dataset.ammo = this.ammo;
+    this.addImages(card);
+    return card;
   }
 }
 
-// Game Mode Configuration
+// GAME MODE CONFIGURATION
 const gameModeToAmounts = new Map([
   ['easy',
     {
@@ -75,7 +77,6 @@ const gameModeToAmounts = new Map([
 ]);
 
 // Home Screen Configuration
-// ===================================================================================//
 const gameModeOptions = document.querySelectorAll('.game-mode-btn');
 const toRulesScreenBtn = document.getElementById('toRulesScreen');
 let gameMode = "";
@@ -181,12 +182,9 @@ function goToRulesScreen() {
   document.getElementById('rules-screen').classList.add('active');
 };
 
-
-// const cardAmounts = gameModeToAmounts.get(localStorage.getItem('shootoutGameMode'));
-
-function dealCards() {
+function createCards() {
+  console.log('create cards')
   const cardAmounts = gameModeToAmounts.get(localStorage.getItem('shootoutGameMode'));
-  console.log({cardAmounts});
 
   // Good Cards
   const ammoCards = [...Array(cardAmounts.ammo)].map(i => new Card('ammunition', 'img/react.svg', null, 1).createCard())
@@ -206,68 +204,84 @@ function dealCards() {
   const badCards = [...snakeCards, ...scorpionCards, ...enemigoCards, ...banditoCards, ...rivalCards]
   const allCards = [...goodCards, ...badCards]
 
-  // Deal Cards Randomly
-  allCards.forEach(card => {
-    let randomPos = Math.floor(Math.random() * allCards.length)
-    card.style.order = randomPos
-    console.log(card)
-    game.appendChild(card)
+  cardDeck = allCards;
+}
+
+function dealCards() {
+  removeCards()
+  createCards()
+  cardDeck.forEach(card => {
+    let randomPos = Math.floor(Math.random() * cardDeck.length)
+    card.style.order = randomPos;
+    game.appendChild(card);
+    card.addEventListener('click', flipCard);
   })
 }
 
-// Start Game
+function removeCards() {
+  game.innerHTML = '';
+}
+
+function flipCard() {
+  if (lockBoard) return;
+  if (this === firstCard) return;
+
+  this.classList.add('flip');
+
+  if (!hasFlippedCard) {
+   hasFlippedCard = true;
+   firstCard = this;
+   return;
+  }
+
+  secondCard = this;
+
+  checkForMatch();
+};
+
+function checkForMatch() {
+  let isMatch = firstCard.dataset.cardtype === secondCard.dataset.cardtype;
+  isMatch ? disableCards() : unflipCards();
+};
+
+function disableCards() {
+  firstCard.removeEventListener('click', flipCard);
+  secondCard.removeEventListener('click', flipCard);
+
+  resetBoard();
+};
+
+function unflipCards() {
+  lockBoard = true;
+  setTimeout(() => {
+    firstCard.classList.remove('flip');
+    secondCard.classList.remove('flip');
+
+    resetBoard();
+  }, 1500);
+};
+
+function resetBoard() {
+  [hasFlippedCard, lockBoard] = [false, false];
+  [firstCard, secondCard] = [null,null];
+};
+
+// START GAME
 document.getElementById('startGame').addEventListener('mouseup', function() {
   document.getElementById('rules-screen').classList.remove('active');
   document.getElementById('game-screen').classList.add('active');
-  dealCards()
+  dealCards(cardDeck);
+});
+
+// OPTIONS MENU
+document.getElementById('options-header').addEventListener('mouseup', function() {
+  document.getElementById('options-menu').classList.toggle('open');
 })
 
+function resetGame(cardDeck) {
+  dealCards(cardDeck);
+};
 
-
-
-function flipCard() {
-  if (lockBoard) return
-  if (this === firstCard) return
-
-  this.classList.add('flip')
-
-  if (!hasFlippedCard) {
-   hasFlippedCard = true
-   firstCard = this
-   return
-  }
-
-  secondCard = this
-
-  checkForMatch()
-}
-
-function checkForMatch() {
-  let isMatch = firstCard.dataset.cardtype === secondCard.dataset.cardtype
-  isMatch ? disableCards() : unflipCards()
-}
-
-function disableCards() {
-  firstCard.removeEventListener('click', flipCard)
-  secondCard.removeEventListener('click', flipCard)
-
-  resetBoard()
-}
-
-function unflipCards() {
-  lockBoard = true
-  setTimeout(() => {
-    firstCard.classList.remove('flip')
-    secondCard.classList.remove('flip')
-
-    resetBoard()
-  }, 1500)
-}
-
-function resetBoard() {
-  [hasFlippedCard, lockBoard] = [false, false]
-  [firstCard, secondCard] = [null,null]
-}
-
-
-// cards.forEach(card => card.addEventListener('click', flipCard))
+function quitGame() {
+  
+};

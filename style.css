@@ -63,6 +63,7 @@ button.screen-nav-btn {
   border-radius: 3px;
 }
 .sideBoard {
+  position: relative;
   border-radius: 5px;
   background: var(--sideBoard);
   width: 15%;
@@ -261,4 +262,62 @@ button.screen-nav-btn {
 }
 .memory-card:hover .back-face {
   background: var(--purpleHover);
+}
+
+/*+++++++++++*/
+  /* PLAYERBOARD -> left sideboard */
+/*+++++++++++*/
+/* Options Menu */
+#options-menu {
+  display: flex;
+  flex-flow: column;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transition: all .3s ease-in-out;
+  transform: translateY(15vh);
+}
+#options-menu.open {
+  transform: none;
+}
+#options-menu #options-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5a3955;
+  padding: .5rem 1rem;
+  cursor: pointer;
+}
+#options-menu #options-header i {
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+  color: white;
+  pointer-events: none;
+}
+#options-menu #options-header:hover i {
+  transform: rotate(360deg);
+}
+#options-menu .options-body {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 15vh;
+  padding: 1rem;
+  background: #3a2335;
+}
+#options-menu .options-body button {
+  width: 100%;
+  margin: .25rem 0;
+  padding: .5rem 1rem;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  background: #5a3955;
+  transition: all .3s ease;
+  cursor: pointer;
+}
+#options-menu .options-body button:hover {
+  background: #50314c;
 }

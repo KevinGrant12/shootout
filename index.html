@@ -15,7 +15,18 @@
   <!-- Master Game Wrap -->
   <div class="master-wrap">
     <!-- Left SideBoard -->
-    <div class="playerBoard sideBoard"></div>
+    <div class="playerBoard sideBoard">
+
+      <div id="options-menu">
+        <div id="options-header">
+          <i class="fas fa-cog"></i>
+        </div>
+        <div class="options-body">
+          <button onmouseup="resetGame()">Reset Game</button>
+          <button onmouseup="quiteGame()">Quit Game</button>
+        </div>
+      </div>
+    </div>
 
       <!-- Home Screen -->
       <section class="screen active" id="home-screen">
@@ -78,7 +89,6 @@
     <!-- Right SideBoard -->
     <div class="trailBoard sideBoard"></div>
   </div>
-
 
   <script src="./scripts.js"></script>
 </body>
