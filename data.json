@@ -1,0 +1,88 @@
+{
+  "locations": [
+    {
+      "name":"Desert Oasis",
+      "description":"A small oasis in the middle of the desert. Luckily for you, they had water to quench your thirst!",
+      "population":"400",
+      "ammo":"0",
+      "health":"+1"
+    },
+    {
+      "name":"Betty Town",
+      "description":"A town whos main attraction is the Betty Brothel. Unfortunately, you caught a 'bug' during your stay.",
+      "population":"400",
+      "ammo":"0",
+      "health":"-1"
+    },
+    {
+      "name":"Keg Town",
+      "description":"Known throughout the land for their tall beers and fat locals. You ate your fill, drank to your hearts desire, and left with a hefty boost in moral!",
+      "population":"400",
+      "ammo":"0",
+      "health":"+1"
+    },
+    {
+      "name":"Dusty Rock",
+      "description":"An old and crusty rock that provided a bit of shade and a place to camp for the night.",
+      "population":"400",
+      "ammo":"0",
+      "health":"0"
+    },
+    {
+      "name":"Switchback & Forth Canyon",
+      "description":"What the f@*# was that all about? You got a little lost, but no harm done.",
+      "population":"400",
+      "ammo":"0",
+      "health":"0"
+    },
+    {
+      "name":"Vultures Nest",
+      "description":"Beefy birdies with ferocious appetites. One managed to take a chunk out of your abdomen while you were napping.",
+      "population":"400",
+      "ammo":"0",
+      "health":"-1"
+    },
+    {
+      "name":"Cactus County",
+      "description":"That place was full of pricks.",
+      "population":"400",
+      "ammo":"0",
+      "health":"-1"
+    },
+    {
+      "name":"Crooks Nook",
+      "description":"A shady town with crooked folk. You managed to make it out alive, but not before losing some brass to the locals.",
+      "population":"400",
+      "ammo":"-1",
+      "health":"0"
+    },
+    {
+      "name":"Camelback Mountain",
+      "description":"A beautiful break from the monotony of the dry lands. You sat and pondered and left feeling rejuvenated.",
+      "population":"400",
+      "ammo":"0",
+      "health":"+1"
+    },
+    {
+      "name":"Gringo Valley",
+      "description":"Lots of white people, lots or bourbon. Normally you would feel replenished after a whiskey-weekend, but those gringos were ponding bottom-shelf shooters until the sun rose.",
+      "population":"400",
+      "ammo":"0",
+      "health":"0"
+    },
+    {
+      "name":"Indian Settlement",
+      "description":"Chief Sits-With-Turtles turned out to be easy-going. His tribe put you up for the night and sold you supplies for the trail.",
+      "population":"400",
+      "ammo":"+1",
+      "health":"0"
+    },
+    {
+      "name":"Ghost Town",
+      "description":"A straight of bones and banishment. Not many make it through this town alive, but you managed.",
+      "population":"400",
+      "ammo":"0",
+      "health":"0"
+    }
+  ]
+}

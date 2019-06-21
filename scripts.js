@@ -4,6 +4,7 @@ let hasFlippedCard = false
 let lockBoard = false
 let firstCard, secondCard
 let cardDeck = [];
+let numOfLocations = 0;
 
 class Card {
   constructor(name, imgUrl, health, ammo) {
@@ -192,6 +193,7 @@ function createCards() {
   const foodCards = [...Array(cardAmounts.food)].map(i => new Card('food', 'img/angular.svg', 1, null).createCard())
   const cigarCards = [...Array(cardAmounts.cigar)].map(i => new Card('cigar', 'img/ember.svg', 1, null).createCard())
 
+
   // Bad Cards
   const snakeCards = [...Array(cardAmounts.snake)].map(i => new Card('snake', 'img/backbone.svg', -1, null).createCard())
   const scorpionCards = [...Array(cardAmounts.scorpion)].map(i => new Card('scorpion', 'img/aurelia.svg', -1, null).createCard())
@@ -204,7 +206,12 @@ function createCards() {
   const badCards = [...snakeCards, ...scorpionCards, ...enemigoCards, ...banditoCards, ...rivalCards]
   const allCards = [...goodCards, ...badCards]
 
+  // Abstract cards to be dealt
   cardDeck = allCards;
+
+  // Set Number of locations to half the amount of good cards
+  numOfLocations = goodCards.length / 2;
+  console.log(numOfLocations);
 }
 
 function dealCards() {
